@@ -13,14 +13,15 @@ def read_table(db_details,table_name,limit=0):
 
     if limit == 0:
         query = f'select * from {table_name};'
-        print(query)
+        #print(query)
     else:
         query = f'select * from {table_name} limit {limit};'
-        print(query)
+        #print(query)
     
     cursor.execute(query)
     data = cursor.fetchall()
     column_names = cursor.column_names
+    #print(column_names)
     connection.close()
 
     return data,column_names

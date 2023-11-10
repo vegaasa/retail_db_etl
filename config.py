@@ -12,7 +12,7 @@ DB_DETAILS = {
         'TARGET_DB':{
             'DB_TYPE'   :'postgres',
             'DB_HOST'   :'localhost',
-            'DB_NAME'   :'retail_db',
+            'DB_NAME'   :'db_retail',
             'DB_USER'   : os.environ.get('DB_USER_POSTGRES'),
             'DB_PASS'   : os.environ.get('DB_PASS_POSTGRES')
             }

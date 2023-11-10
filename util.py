@@ -2,6 +2,7 @@ import pandas as pd
 from config import DB_DETAILS
 from mysql import connector as mc
 from mysql.connector import errorcode as ec
+import psycopg2
 
 def load_db_details(env):
     return DB_DETAILS[env]
@@ -10,6 +11,13 @@ def get_tables(path):
     tables = pd.read_csv(path,sep=':')
     #filter only to be loaded to yes
     return tables.query('to_be_loaded == "yes"')
+
+def get_pg_connection(db_host,db_name,db_user,db_pass):
+    connection = psycopg2.connect(host=db_host,          
+                                database=db_name,
+                                user=db_user,
+                                password=db_pass)
+    return connection
 
 def get_mysql_connection(db_host,db_name,db_user,db_pass):
     try:
@@ -30,6 +38,13 @@ def get_connection(db_type,db_host,db_user,db_pass,db_name):
     connection = None
     if db_type == 'mysql':
         connection = get_mysql_connection(
+            db_host=db_host,
+            db_name=db_name,
+            db_user=db_user,
+            db_pass=db_pass
+        )
+    if db_type == 'postgres':
+        connection = get_pg_connection(
             db_host=db_host,
             db_name=db_name,
             db_user=db_user,
